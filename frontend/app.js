@@ -22,7 +22,13 @@ function startBlockCounter() {
         el.textContent = currentBlock.toLocaleString();
     }, 3500);
 }
-startBlockCounter();
+
+// Wait for page to load, then start block counter
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startBlockCounter);
+} else {
+    startBlockCounter();
+}
 
 // ── Connect Wallet (simulated — no real wallet on DevNet) ─────
 function connectWallet() {
@@ -312,3 +318,12 @@ async function simulateTrigger(actualRain) {
     document.getElementById('tx-fee').textContent = `0.000021 DEMO RALO`;
     document.getElementById('tx-explorer').href = `https://explorer.rialo.io/tx/${hash2}`;
 }
+
+// ── Auto-connect wallet on page load ─────────────────────────
+window.addEventListener('load', () => {
+    const btn = document.getElementById('walletBtn');
+    if (btn) {
+        btn.disabled = false;  // enable button
+        connectWallet();       // auto-connect
+    }
+});
