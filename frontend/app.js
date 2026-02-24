@@ -23,11 +23,28 @@ function startBlockCounter() {
     }, 3500);
 }
 
-// Wait for page to load, then start block counter
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startBlockCounter);
-} else {
+// Start block counter immediately when DOM is ready
+if (document.readyState !== 'loading') {
     startBlockCounter();
+} else {
+    document.addEventListener('DOMContentLoaded', startBlockCounter);
+}
+
+// ── Auto-connect wallet on page load ─────────────────────────
+function autoConnectWallet() {
+    const btn = document.getElementById('walletBtn');
+    if (btn && !connectedWallet) {
+        connectWallet();
+    }
+}
+
+// Trigger auto-connect when DOM is ready
+if (document.readyState !== 'loading') {
+    setTimeout(autoConnectWallet, 100);
+} else {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(autoConnectWallet, 100);
+    });
 }
 
 // ── Connect Wallet (simulated — no real wallet on DevNet) ─────
@@ -318,12 +335,3 @@ async function simulateTrigger(actualRain) {
     document.getElementById('tx-fee').textContent = `0.000021 DEMO RALO`;
     document.getElementById('tx-explorer').href = `https://explorer.rialo.io/tx/${hash2}`;
 }
-
-// ── Auto-connect wallet on page load ─────────────────────────
-window.addEventListener('load', () => {
-    const btn = document.getElementById('walletBtn');
-    if (btn) {
-        btn.disabled = false;  // enable button
-        connectWallet();       // auto-connect
-    }
-});
