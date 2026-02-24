@@ -1,0 +1,20 @@
+[package]
+name = "rialo-weather-insurance"
+version = "0.1.0"
+edition = "2021"
+
+# Rialo contracts compile to RISC-V via this target
+# Build with: cargo build --target riscv64gc-unknown-none-elf --release
+
+[[bin]]
+name = "weather_insurance"
+path = "src/lib.rs"
+
+[dependencies]
+rialo-sdk = { version = "0.1", features = ["http", "token", "events"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[profile.release]
+opt-level = "z" # optimise for size — contracts have a bytecode limit
+lto = true
