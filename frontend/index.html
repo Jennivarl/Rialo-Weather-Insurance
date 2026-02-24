@@ -64,10 +64,6 @@
                 <label>Payout Amount (DEMO RALO tokens, max 200)</label>
                 <input id="payout" type="number" value="200" min="1" max="200" />
             </div>
-            <div class="form-row">
-                <label>OpenWeatherMap API Key</label>
-                <input id="apiKey" type="text" placeholder="Paste your free API key here" />
-            </div>
 
             <button class="btn-primary" onclick="setupPolicy()">
                 Create Policy &amp; Deposit Funds
@@ -81,8 +77,8 @@
             <div class="step-label">Step 2 — Contract Calls Weather API</div>
             <h2>Trigger Weather Check</h2>
             <p class="hint">
-                The contract makes a live HTTPS call to OpenWeatherMap.
-                No oracle. No external bot. Just the contract itself.
+                The contract calls PayOnRain's weather backend service.
+                No oracle middleman. No keeper bot. Just instant data &amp; automatic payout.
             </p>
 
             <button class="btn-primary" onclick="checkWeather()" id="checkBtn" disabled>

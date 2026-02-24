@@ -25,7 +25,6 @@ pub struct InsuranceState {
     pub threshold_mm:   f64,         // rainfall threshold in mm (supports fractional values)
     pub payout_amount:  u64,         // tokens to send when triggered
     pub is_paid_out:    bool,        // guard — can only pay once
-    pub api_key:        String,      // OpenWeatherMap API key (set at deploy)
 }
 
 // ── Helper structs for parsing the weather API response ──────
@@ -47,7 +46,7 @@ pub async fn setup_policy(
     location:       String,
     threshold_mm:   f64,
     payout_amount:  u64,
-    api_key:        String,
+) -> RialoResult<()> {
 ) -> RialoResult<()> {
 
     let state = &mut ctx.state;
@@ -62,7 +61,6 @@ pub async fn setup_policy(
     state.location      = location;
     state.threshold_mm  = threshold_mm;
     state.payout_amount = payout_amount;
-    state.api_key       = api_key;
     state.is_paid_out   = false;
 
     emit!(PolicyCreated {
@@ -91,11 +89,12 @@ pub async fn check_weather_and_pay(
     // Guard: don't pay twice
     require!(!state.is_paid_out, "Policy already paid out.");
 
-    // ── Step 1: Build the OpenWeatherMap API URL ──────────────
+    // ── Step 1: Call PayOnRain backend service ─────────────────
+    //    Backend handles weather API calls and returns current rainfall.
+    //    This removes the need for users to manage API keys.
     let url = format!(
-        "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric",
+        "https://api.payonrain.io/weather?location={}",
         state.location,
-        state.api_key,
     );
 
     // ── Step 2: Make the HTTP call — native Rialo feature ─────

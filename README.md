@@ -33,15 +33,16 @@ Deployed on Rialo DevNet
 
 ### Key Instructions
 
-1. **`setup_policy(location, threshold_mm, payout_amount, api_key)`**
+1. **`setup_policy(location, threshold_mm, payout_amount)`**
    - Allows a user to register a weather insurance policy
    - `location`: City name (e.g., "Nairobi")
    - `threshold_mm`: Rainfall threshold in millimeters (min: 0.1 mm)
    - `payout_amount`: Tokens to pay out (max: 200 RALO)
-   - `api_key`: OpenWeatherMap API key
+   - **No API key needed** — backend handles all weather data
 
 2. **`check_weather_and_pay()`**
-   - Fetches live weather data from OpenWeatherMap
+   - Fetches live weather data from PayOnRain backend service
+   - Backend service queries trusted weather providers (e.g., OpenWeatherMap)
    - Automatically pays out if rainfall >= threshold
    - Can only be called once per policy (single payout guard)
 
@@ -100,8 +101,51 @@ npx http-server -p 3000
 ### Frontend Features
 - **Dark Brown Theme**: Clean, professional UI with organic gradient blob backgrounds
 - **Wallet Integration**: Connect wallet and sign transactions
-- **Policy Setup Form**: Input location, rainfall threshold, and payout amount
+- **Policy Setup Form**: Input location, rainfall threshold, and payout amount (no API keys needed)
 - **Payment Processing**: Submit policies to the smart contract
+
+## Backend Service Architecture
+
+PayOnRain uses a **backend service layer** to handle weather data securely:
+
+```
+User Frontend
+       ↓
+PayOnRain Smart Contract
+       ↓
+PayOnRain Backend Service (api.payonrain.io)
+       ↓
+Weather Provider (OpenWeatherMap, etc.)
+```
+
+### Benefits
+
+- **Zero User Friction**: Users don't manage API keys
+- **Secure**: API credentials stay on your backend, never exposed
+- **Scalable**: One backend service, unlimited users
+- **Maintainable**: Weather provider changes don't require contract updates
+
+### Backend Implementation (Example)
+
+A minimal Node.js backend:
+
+```javascript
+// GET /weather?location=Nairobi
+app.get('/weather', async (req, res) => {
+  const location = req.query.location;
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.WEATHER_API_KEY}`
+  );
+  const data = await response.json();
+  res.json({
+    rainfall_mm: data.rain?.['1h'] ?? 0,
+    location: data.name,
+    timestamp: Date.now()
+  });
+});
+```
+
+The smart contract calls this endpoint, gets current rainfall, and processes automatically.
 
 ## How It Works
 
@@ -115,8 +159,8 @@ npx http-server -p 3000
    - Enter delivery location (e.g., "Nairobi")
    - Set rainfall threshold (e.g., 50 mm)
    - Set payout amount (e.g., 50 RALO)
-   - Provide OpenWeatherMap API key
    - Submit policy to smart contract
+   - No API key input needed
 
 3. **Policy Monitoring**
    - Contract is live and watching weather data
@@ -137,7 +181,9 @@ Policy stored on-chain
     ↓
 check_weather_and_pay()
     ↓
-Contract calls OpenWeatherMap API
+Contract calls PayOnRain backend service
+    ↓
+Backend queries weather provider
     ↓
 Rainfall >= Threshold?
     ├─ YES → Transfer payout to user wallet
@@ -145,12 +191,6 @@ Rainfall >= Threshold?
 ```
 
 ## Configuration
-
-### OpenWeatherMap API Key
-
-1. Sign up at [OpenWeatherMap](https://openweathermap.org/api)
-2. Get your free API key
-3. Provide it when setting up a policy through the frontend
 
 ### Supported Locations
 
