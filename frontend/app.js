@@ -52,24 +52,18 @@ function connectWallet() {
     const btn = document.getElementById('walletBtn');
     if (connectedWallet) return; // already connected
 
-    btn.textContent = '⟳ Connecting…';
-    btn.disabled = true;
+    // Generate wallet address immediately
+    const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+    let addr = '';
+    for (let i = 0; i < 44; i++) {
+        addr += chars[Math.floor(Math.random() * chars.length)];
+    }
+    connectedWallet = addr;
 
-    // Simulate wallet handshake delay
-    setTimeout(() => {
-        // Generate a realistic-looking Rialo wallet address
-        const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-        let addr = '';
-        for (let i = 0; i < 44; i++) {
-            addr += chars[Math.floor(Math.random() * chars.length)];
-        }
-        connectedWallet = addr;
-
-        // Show shortened address on button
-        btn.textContent = `✓ ${addr.slice(0, 6)}…${addr.slice(-6)}`;
-        btn.classList.add('connected');
-        btn.disabled = true; // disable after connecting
-    }, 900);
+    // Show shortened address on button
+    btn.textContent = `✓ ${addr.slice(0, 6)}…${addr.slice(-6)}`;
+    btn.classList.add('connected');
+    btn.disabled = true; // disable after connecting
 }
 
 // ── Auto-connect wallet on page load ─────────────────────────
