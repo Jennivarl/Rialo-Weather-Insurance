@@ -43,11 +43,16 @@ function connectWallet() {
         connectedWallet = addr;
 
         // Show shortened address on button
-        btn.textContent = `${addr.slice(0, 4)}…${addr.slice(-4)}`;
+        btn.textContent = `✓ ${addr.slice(0, 6)}…${addr.slice(-6)}`;
         btn.classList.add('connected');
-        btn.disabled = false;
+        btn.disabled = true; // disable after connecting
     }, 900);
 }
+
+// ── Auto-connect wallet on page load ─────────────────────────
+window.addEventListener('load', () => {
+    connectWallet();
+});
 
 // ── Utility helpers ───────────────────────────────────────────
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
