@@ -1,5 +1,5 @@
 // ============================================================
-//  Rialo Weather Insurance — Frontend Logic
+//  PayOnRain — Frontend Logic
 //
 //  In a real Rialo app this file would talk to the chain via
 //  the Rialo JS SDK.  For this DevNet demo we simulate the

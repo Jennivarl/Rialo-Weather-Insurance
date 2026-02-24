@@ -1,5 +1,5 @@
 [package]
-name = "rialo-weather-insurance"
+name = "payonrain"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,7 +7,7 @@ edition = "2021"
 # Build with: cargo build --target riscv64gc-unknown-none-elf --release
 
 [[bin]]
-name = "weather_insurance"
+name = "payonrain"
 path = "src/lib.rs"
 
 [dependencies]

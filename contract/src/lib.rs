@@ -1,5 +1,5 @@
 // ============================================================
-//  Rialo Weather Insurance — Smart Contract
+//  PayOnRain — Smart Contract
 //  Network : Rialo DevNet
 //  Language: Rust (RISC-V target via Rialo SDK)
 //

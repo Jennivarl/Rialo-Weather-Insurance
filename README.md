@@ -1,4 +1,4 @@
-# Rialo Weather Insurance
+# PayOnRain
 
 A blockchain-based weather insurance platform built on Rialo DevNet. Users can set up policies that automatically pay out when rainfall exceeds a specified threshold, enabling automated protection for delivery companies and agricultural operations.
 
@@ -13,7 +13,7 @@ A blockchain-based weather insurance platform built on Rialo DevNet. Users can s
 ## Project Structure
 
 ```
-rialo-weather-insurance/
+payonrain/
 ├── frontend/           # Web interface (HTML/CSS/JavaScript)
 │   ├── index.html      # Main UI
 │   ├── app.js          # Form handling and wallet integration
@@ -67,14 +67,14 @@ rustup target add riscv64gc-unknown-none-elf
 # Build for Rialo DevNet (RISC-V target)
 cargo build --target riscv64gc-unknown-none-elf --release
 
-# Output: target/riscv64gc-unknown-none-elf/release/weather_insurance
+# Output: target/riscv64gc-unknown-none-elf/release/payonrain
 ```
 
 ### Deploy
 
 ```bash
 # Use Rialo CLI to deploy the compiled contract
-rialo deploy target/riscv64gc-unknown-none-elf/release/weather_insurance
+rialo deploy target/riscv64gc-unknown-none-elf/release/payonrain
 ```
 
 ## Frontend Setup
