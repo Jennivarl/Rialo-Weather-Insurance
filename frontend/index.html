@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rialo Weather Insurance — Live Demo</title>
+    <link rel="stylesheet" href="style.css?v=12" />
+</head>
+
+<body>
+
+    <!-- ── Header ──────────────────────────────────────────── -->
+    <header>
+        <div class="logo-banner">
+            <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
+                class="logo-bg">
+                <defs>
+                    <style>
+                        .blob-header {
+                            fill: #1A1714;
+                        }
+                    </style>
+                </defs>
+                <rect width="800" height="180" fill="#f5f1e8" />
+                <path class="blob-header"
+                    d="M -50 20 Q 50 -10, 150 15 Q 200 40, 180 100 Q 150 140, 80 150 Q 20 155, -20 130 Q -60 100, -50 20 Z" />
+                <path class="blob-header"
+                    d="M 650 -10 Q 750 5, 820 50 Q 840 90, 810 140 Q 750 170, 680 160 Q 620 150, 630 80 Q 640 20, 650 -10 Z" />
+            </svg>
+            <div class="logo-text">Rialo Weather Insurance</div>
+        </div>
+        <div class="header-right">
+            <div class="network-badge">
+                <span class="net-dot"></span>
+                Rialo DevNet
+            </div>
+            <div class="block-counter">
+                Block <span id="block-num">—</span>
+            </div>
+            <button class="btn-wallet" id="walletBtn" onclick="connectWallet()">
+                Connect Wallet
+            </button>
+        </div>
+    </header>
+
+    <!-- ── Main ────────────────────────────────────────────── -->
+    <main>
+
+        <!-- Key pitch line -->
+        <p class="tagline">
+            On any other chain: oracle + keeper + relay.<br />
+            On Rialo: <strong>one HTTP call inside the contract.</strong>
+        </p>
+
+        <!-- ── STEP 1: Setup Policy ──────────────────────────── -->
+        <section class="card" id="step1">
+            <div class="step-label">Step 1 — User Sets Up Policy</div>
+            <h2>Register Insurance Policy</h2>
+
+            <div class="form-row">
+                <label>City / Location</label>
+                <input id="city" type="text" value="Nairobi" placeholder="e.g. Nairobi" />
+            </div>
+            <div class="form-row">
+                <label>Rain Threshold (mm, min 0.1)</label>
+                <input id="threshold" type="number" value="0.1" min="0.1" step="0.1" />
+            </div>
+            <div class="form-row">
+                <label>Payout Amount (DEMO RALO tokens, max 200)</label>
+                <input id="payout" type="number" value="200" min="1" max="200" />
+            </div>
+            <div class="form-row">
+                <label>OpenWeatherMap API Key</label>
+                <input id="apiKey" type="text" placeholder="Paste your free API key here" />
+            </div>
+
+            <button class="btn-primary" onclick="setupPolicy()">
+                Create Policy &amp; Deposit Funds
+            </button>
+
+            <div class="output" id="step1-output" style="display:none"></div>
+        </section>
+
+        <!-- ── STEP 2: Check Weather ─────────────────────────── -->
+        <section class="card locked" id="step2">
+            <div class="step-label">Step 2 — Contract Calls Weather API</div>
+            <h2>Trigger Weather Check</h2>
+            <p class="hint">
+                The contract makes a live HTTPS call to OpenWeatherMap.
+                No oracle. No external bot. Just the contract itself.
+            </p>
+
+            <button class="btn-primary" onclick="checkWeather()" id="checkBtn" disabled>
+                Check Live Weather &amp; Evaluate
+            </button>
+
+            <div class="weather-box" id="weather-box" style="display:none">
+                <div class="weather-row"><span>Location</span><span id="w-city">—</span></div>
+                <div class="weather-row"><span>Rainfall (last 1h)</span><span id="w-rain">—</span></div>
+                <div class="weather-row"><span>Policy Threshold</span><span id="w-threshold">—</span></div>
+                <div class="weather-row"><span>Condition</span><span id="w-condition">—</span></div>
+                <div class="weather-row"><span>Temperature</span><span id="w-temp">—</span></div>
+            </div>
+            <pre id="debug-json"
+                style="display:none;background:#0f1724;color:#9ca3af;padding:12px;margin-top:12px;border-radius:8px;overflow:auto;max-height:260px;white-space:pre-wrap;font-size:0.8rem;"></pre>
+        </section>
+
+        <!-- ── STEP 3: Payout ────────────────────────────────── -->
+        <section class="card locked" id="step3">
+            <div class="step-label">Step 3 — Automatic Payout</div>
+            <h2>Result</h2>
+
+            <div class="payout-status" id="payout-status">
+                <div id="payout-icon"></div>
+                <div id="payout-message">Waiting for weather check…</div>
+                <div id="payout-detail"></div>
+            </div>
+
+            <div class="tx-box" id="tx-box" style="display:none">
+                <div class="tx-row"><span>Tx Hash</span><span id="tx-hash" class="mono">—</span></div>
+                <div class="tx-row"><span>Company Wallet</span><span id="tx-farmer" class="mono">—</span></div>
+                <div class="tx-row"><span>Amount Sent</span><span id="tx-amount">—</span></div>
+                <div class="tx-row"><span>Block</span><span id="tx-block">—</span></div>
+                <div class="tx-row"><span>Fee</span><span id="tx-fee">—</span></div>
+                <div class="tx-row">
+                    <span>Explorer</span>
+                    <a id="tx-explorer" class="explorer-link" href="#" target="_blank">View on Rialo Explorer ↗</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── How it works ──────────────────────────────────── -->
+        <section class="explainer">
+            <h3>How this works on Rialo vs. other chains</h3>
+            <div class="compare-grid">
+                <div class="compare-col bad">
+                    <div class="compare-heading">Other Blockchains</div>
+                    <ul>
+                        <li>Deploy oracle smart contract</li>
+                        <li>Set up Chainlink node / data feed</li>
+                        <li>Build a keeper / cron bot off-chain</li>
+                        <li>Write relay + aggregation logic</li>
+                        <li>Pay oracle fees every check</li>
+                        <li>Hope nothing goes out of sync</li>
+                    </ul>
+                </div>
+                <div class="compare-col good">
+                    <div class="compare-heading">Rialo</div>
+                    <ul>
+                        <li>Write one async HTTP call in the contract</li>
+                        <li>Set a condition</li>
+                        <li>Transfer tokens if true</li>
+                        <li class="spacer"> </li>
+                        <li class="spacer"> </li>
+                        <li class="spacer"> </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        Built on <strong>Rialo DevNet</strong> · Powered by <strong>Subzero Labs</strong> · rialo.io
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

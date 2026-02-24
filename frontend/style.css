@@ -1,0 +1,494 @@
+/* ── Reset & Base ────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f5f1e8;
+    --surface: #ffffff;
+    --surface2: #f0ebe2;
+    --border: #d4cfc5;
+    --accent: #1A1714;
+    --accent2: #1A1714;
+    --red: #ff6b6b;
+    --text: #1a1a1a;
+    --muted: #666666;
+    --radius: 14px;
+    --shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #f5f1e8;
+    background-image:
+        radial-gradient(ellipse 600px 400px at 10% 20%, #1A1714 0%, transparent 40%),
+        radial-gradient(ellipse 500px 350px at 90% 10%, #1A1714 0%, transparent 38%),
+        radial-gradient(ellipse 550px 380px at 70% 60%, #1A1714 0%, transparent 42%),
+        radial-gradient(ellipse 480px 420px at 20% 75%, #1A1714 0%, transparent 45%),
+        radial-gradient(ellipse 520px 360px at 85% 80%, #1A1714 0%, transparent 40%),
+        radial-gradient(circle at 50% 35%, #1A1714 0%, transparent 25%),
+        radial-gradient(circle at 55% 50%, #1A1714 0%, transparent 20%),
+        radial-gradient(ellipse 700px 300px at 45% -15%, #1A1714 0%, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.logo-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: auto;
+    padding: 10px 20px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #1A1714;
+}
+
+.logo-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: none;
+}
+
+.logo-text {
+    position: relative;
+    z-index: 1;
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    font-family: 'Georgia', 'Garamond', serif;
+    color: #f5f1e8;
+    margin-left: 0;
+    text-shadow: none;
+}
+
+/* ── Header right cluster ────────────────────────────────── */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.network-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    background: rgba(0, 137, 123, 0.08);
+    color: var(--accent2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 137, 123, 0.3);
+    font-weight: 600;
+}
+
+.net-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 6px var(--accent2);
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.block-counter {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    background: var(--surface2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+}
+
+.block-counter span {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* ── Wallet button ───────────────────────────────────────── */
+.btn-wallet {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--accent);
+    background: rgba(233, 30, 99, 0.08);
+    color: var(--accent);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-wallet:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-wallet.connected {
+    border-color: var(--accent2);
+    background: rgba(0, 137, 123, 0.08);
+    color: var(--accent2);
+}
+
+/* ── Explorer link ───────────────────────────────────────── */
+.explorer-link {
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.explorer-link:hover {
+    color: var(--accent2);
+    text-decoration: underline;
+}
+
+/* ── Main container ──────────────────────────────────────── */
+main {
+    max-width: 720px;
+    margin: 48px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    flex: 1;
+}
+
+.tagline {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.tagline strong {
+    color: var(--accent2);
+}
+
+/* ── Cards ───────────────────────────────────────────────── */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    box-shadow: var(--shadow);
+    transition: opacity 0.3s, filter 0.3s;
+}
+
+.card.locked {
+    opacity: 0.45;
+    pointer-events: none;
+    filter: grayscale(0.4);
+}
+
+.card.unlocked {
+    opacity: 1;
+    pointer-events: all;
+    filter: none;
+}
+
+.step-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+/* ── Form ────────────────────────────────────────────────── */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.form-row label {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.form-row input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-row input:focus {
+    border-color: var(--accent);
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn-primary {
+    width: 100%;
+    padding: 13px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #c2185b;
+    transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+    background: #e0e0e0;
+    color: var(--muted);
+    cursor: not-allowed;
+}
+
+/* ── Output box ──────────────────────────────────────────── */
+.output {
+    margin-top: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--accent2);
+}
+
+/* ── Weather box ─────────────────────────────────────────── */
+.weather-box {
+    margin-top: 20px;
+    background: var(--surface2);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.weather-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 18px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.weather-row:last-child {
+    border-bottom: none;
+}
+
+.weather-row span:first-child {
+    color: var(--muted);
+}
+
+.weather-row span:last-child {
+    font-weight: 600;
+}
+
+/* ── Payout status ───────────────────────────────────────── */
+.payout-status {
+    text-align: center;
+    padding: 28px 0 20px;
+}
+
+#payout-icon {
+    font-size: 3.5rem;
+    margin-bottom: 12px;
+}
+
+#payout-message {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+#payout-detail {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.payout-status.triggered #payout-message {
+    color: var(--accent2);
+}
+
+.payout-status.not-met #payout-message {
+    color: var(--red);
+}
+
+/* ── Transaction box ─────────────────────────────────────── */
+.tx-box {
+    margin-top: 20px;
+    background: var(--surface2);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.tx-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 18px;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.tx-row:last-child {
+    border-bottom: none;
+}
+
+.tx-row span:first-child {
+    color: var(--muted);
+}
+
+.mono {
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    word-break: break-all;
+}
+
+/* ── Explainer / compare grid ────────────────────────────── */
+.explainer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+}
+
+.explainer h3 {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: var(--muted);
+}
+
+.compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.compare-col {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.compare-col.bad {
+    background: rgba(211, 47, 47, 0.06);
+    border: 1px solid rgba(211, 47, 47, 0.2);
+}
+
+.compare-col.good {
+    background: rgba(0, 137, 123, 0.06);
+    border: 1px solid rgba(0, 137, 123, 0.2);
+}
+
+.compare-heading {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.compare-col.bad .compare-heading {
+    color: var(--red);
+}
+
+.compare-col.good .compare-heading {
+    color: var(--accent2);
+}
+
+.compare-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.compare-col ul li {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.compare-col ul li.spacer {
+    visibility: hidden;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+}
+
+footer strong {
+    color: var(--text);
+}
+
+/* ── Loading spinner ─────────────────────────────────────── */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
