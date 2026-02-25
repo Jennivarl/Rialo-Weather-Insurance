@@ -13,8 +13,8 @@ let connectedWallet = null;    // set in connectWallet()
 let currentBlock = 8_412_047;  // realistic Rialo DevNet block number
 
 // ── Initialization: Run after DOM is fully ready ─────────────
-function initializeApp() {
-    // Initialize block counter
+document.addEventListener('DOMContentLoaded', function () {
+    // Show block counter
     const blockEl = document.getElementById('block-num');
     if (blockEl) {
         blockEl.textContent = currentBlock.toLocaleString();
@@ -24,23 +24,7 @@ function initializeApp() {
         }, 3500);
     }
 
-    // Auto-connect wallet
-    const walletBtn = document.getElementById('walletBtn');
-    if (walletBtn && !connectedWallet) {
-        connectWallet();
-    }
-}
-
-// Run initialization after DOM is completely ready
-document.addEventListener('DOMContentLoaded', initializeApp);
-
-// ── Connect Wallet (simulated — no real wallet on DevNet) ─────
-function connectWallet() {
-    const btn = document.getElementById('walletBtn');
-    const display = document.getElementById('wallet-display');
-    if (connectedWallet) return; // already connected
-
-    // Generate wallet address immediately (SOL-style base58)
+    // Auto-connect wallet immediately
     const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     let addr = '';
     for (let i = 0; i < 44; i++) {
@@ -48,13 +32,11 @@ function connectWallet() {
     }
     connectedWallet = addr;
 
-    // Show SOL address format in the span
+    const display = document.getElementById('wallet-display');
     if (display) {
-        display.textContent = `✓ ${addr.slice(0, 5)}…${addr.slice(-4)}`;
+        display.textContent = '✓ ' + addr.slice(0, 5) + '…' + addr.slice(-4);
     }
-    btn.classList.add('connected');
-    btn.disabled = true; // disable after connecting
-}
+});
 
 // ── Utility helpers ───────────────────────────────────────────
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
