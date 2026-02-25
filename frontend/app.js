@@ -116,183 +116,107 @@ async function checkWeather() {
     btn.disabled = true;
     btn.innerHTML = '<span class="spin">⟳</span> Contract calling weather API…';
 
-    // ── Real HTTP call to PayOnRain backend service ───────────────\n    //    Backend handles all weather API calls securely.
-    //    This mirrors exactly what the Rialo contract does on-chain:
-    //      HttpRequest::new(Method::GET, &url).send().await
     const url = `https://api.payonrain.io/weather?location=${encodeURIComponent(policy.city)}`;
+    let weatherData = null;
+    let apiWorked = false;
 
-    let weatherData;
-    let apiWorked = true;
     try {
         const resp = await fetch(url);
-        if (!resp.ok) {
-            const err = await resp.json().catch(() => ({}));
-            throw new Error(err.message || `HTTP ${resp.status}`);
-        }
-        weatherData = await resp.json();
-        // Debug: log full API response for inspection
-        console.log('OpenWeatherMap /weather response:', weatherData);
-        const dbg = document.getElementById('debug-json');
-        if (dbg) {
-            dbg.style.display = 'block';
-            try { dbg.textContent = 'Primary /weather response:\n' + JSON.stringify(weatherData, null, 2); } catch (e) { dbg.textContent = String(weatherData); }
+        if (resp.ok) {
+            weatherData = await resp.json();
+            apiWorked = true;
         }
     } catch (e) {
-        // API key not active yet (new keys take up to 2 hours) — fall through
-        // to demo/simulate mode automatically so the presentation still works.
         apiWorked = false;
-        weatherData = null;
     }
 
-    // Fallback: If API call failed, enable demo mode
     if (!apiWorked) {
-        // Hide debug panel when API failed
-        const dbg = document.getElementById('debug-json'); if (dbg) dbg.style.display = 'none';
         await sleep(1000);
         btn.innerHTML = 'Weather Checked (Demo Mode)';
-
-        // Unlock step 3
         document.getElementById('step3').classList.remove('locked');
         document.getElementById('step3').classList.add('unlocked');
 
         const statusEl = document.getElementById('payout-status');
-        const iconEl = document.getElementById('payout-icon');
-        const msgEl = document.getElementById('payout-message');
-        const detailEl = document.getElementById('payout-detail');
+        statusEl.textContent = 'Backend service initializing. Click below for demo.';
 
-        statusEl.className = 'payout-status';  // neutral — no condition was checked
-        iconEl.textContent = '';
-        msgEl.textContent = 'Backend Service Initializing — Demo Mode Ready';
-        detailEl.textContent = 'Weather service is warming up. Use the button below to run a simulated demo.';
-
-        const forceBtn = document.createElement('button');
-        forceBtn.className = 'btn-primary';
-        forceBtn.style.marginTop = '20px';
-        forceBtn.style.background = '#6ee7b7';
-        forceBtn.style.color = '#0d0f14';
-        forceBtn.textContent = 'Simulate Rain Trigger — Show Full Demo';
-        forceBtn.onclick = () => simulateTrigger(0);
-        statusEl.appendChild(forceBtn);
+        const demoBtn = document.createElement('button');
+        demoBtn.className = 'btn-primary';
+        demoBtn.style.marginTop = '20px';
+        demoBtn.textContent = 'Simulate Payout';
+        demoBtn.onclick = () => simulateTrigger(0);
+        statusEl.appendChild(demoBtn);
         return;
     }
 
-    // Parse rainfall from backend response
-    let rainfallMm = weatherData?.rainfall_mm ?? weatherData?.rain?.['1h'] ?? null;
-    console.warn('OneCall fallback failed', e);
-}
-    }
+    const rainfallMm = weatherData?.rainfall_mm ?? 0;
+    const tempC = weatherData?.temp ?? '—';
+    const conditionStr = weatherData?.condition ?? 'clear';
 
-// If still null, treat as 0.0
-if (rainfallMm == null) rainfallMm = 0.0;
-const conditionStr = weatherData?.weather?.[0]?.description ?? 'clear';
-const tempC = weatherData?.main?.temp ?? '—';
+    const box = document.getElementById('weather-box');
+    box.style.display = 'block';
+    document.getElementById('w-city').textContent = policy.city;
+    document.getElementById('w-rain').textContent = rainfallMm.toFixed(1) + ' mm';
+    document.getElementById('w-threshold').textContent = policy.threshold + ' mm';
+    document.getElementById('w-condition').textContent = conditionStr;
+    document.getElementById('w-temp').textContent = tempC + ' °C';
 
-// Update weather box
-const box = document.getElementById('weather-box');
-box.style.display = 'block';
+    const rainEl = document.getElementById('w-rain');
+    rainEl.style.color = rainfallMm >= policy.threshold ? '#6ee7b7' : '#f87171';
 
-document.getElementById('w-city').textContent = `${policy.city}`;
-document.getElementById('w-rain').textContent = `${rainfallMm.toFixed(1)} mm`;
-document.getElementById('w-threshold').textContent = `${policy.threshold} mm`;
-document.getElementById('w-condition').textContent = conditionStr;
-document.getElementById('w-temp').textContent = `${tempC} °C`;
+    await sleep(1200);
+    btn.innerHTML = 'Weather Checked';
 
-// Colour the rainfall value
-const rainEl = document.getElementById('w-rain');
-rainEl.style.color = rainfallMm >= policy.threshold ? '#6ee7b7' : '#f87171';
+    document.getElementById('step3').classList.remove('locked');
+    document.getElementById('step3').classList.add('unlocked');
 
-// Simulate contract evaluation delay (makes demo feel real)
-await sleep(1200);
-
-btn.innerHTML = 'Weather Checked';
-
-// Unlock step 3
-document.getElementById('step3').classList.remove('locked');
-document.getElementById('step3').classList.add('unlocked');
-
-// ── Evaluate condition & show result ─────────────────────
-const statusEl = document.getElementById('payout-status');
-const iconEl = document.getElementById('payout-icon');
-const msgEl = document.getElementById('payout-message');
-const detailEl = document.getElementById('payout-detail');
-const txBox = document.getElementById('tx-box');
-
-if (rainfallMm >= policy.threshold) {
-    // ── TRIGGERED: show payout ─────────────────────────────
-    await sleep(600);
-
-    statusEl.className = 'payout-status triggered';
-    iconEl.textContent = '';
-    msgEl.textContent = `Payout Sent — ${policy.payout} DEMO RALO`;
-    detailEl.textContent = `Rainfall (${rainfallMm.toFixed(1)} mm) exceeded threshold (${policy.threshold} mm). Contract auto-transferred funds.`;
-
-    // Fake but realistic transaction details
-    const hash1 = fakeTxHash();
-    const company1 = connectedWallet || policy.wallet;
-    txBox.style.display = 'block';
-    document.getElementById('tx-hash').textContent = hash1;
-    document.getElementById('tx-farmer').textContent = company1;
-    document.getElementById('tx-amount').textContent = `${policy.payout} DEMO RALO`;
-    document.getElementById('tx-block').textContent = `#${currentBlock.toLocaleString()}`;
-    document.getElementById('tx-fee').textContent = `0.000021 DEMO RALO`;
-    document.getElementById('tx-explorer').href = `https://explorer.rialo.io/tx/${hash1}`;
-
-} else {
-    // ── NOT TRIGGERED ──────────────────────────────────────
-    statusEl.className = 'payout-status not-met';
-    iconEl.textContent = '';
-    msgEl.textContent = 'Condition Not Met — No Payout';
-    detailEl.textContent = `Rainfall (${rainfallMm.toFixed(1)} mm) is below the ${policy.threshold} mm threshold. Funds stay in the contract vault.`;
-
-    // ── Demo tip: let presenter force-trigger for a live wow moment ──
-    const sep = document.createElement('p');
-    sep.style.cssText = 'font-size:0.75rem;color:#7c8aa0;margin-top:20px;margin-bottom:6px;';
-    sep.textContent = 'Presentation override — does not reflect the contract result above:';
-    statusEl.appendChild(sep);
-
-    const forceBtn = document.createElement('button');
-    forceBtn.className = 'btn-primary';
-    forceBtn.style.background = '#2a3045';
-    forceBtn.style.color = '#7c8aa0';
-    forceBtn.style.border = '1px solid #3a4055';
-    forceBtn.textContent = 'Force Demo Payout (presentation only)';
-    forceBtn.onclick = () => simulateTrigger(rainfallMm);
-    statusEl.appendChild(forceBtn);
-}
-}
-
-// ── Demo helper: force-trigger for dry-weather presentations ──
-async function simulateTrigger(actualRain) {
     const statusEl = document.getElementById('payout-status');
-    const iconEl = document.getElementById('payout-icon');
     const msgEl = document.getElementById('payout-message');
     const detailEl = document.getElementById('payout-detail');
     const txBox = document.getElementById('tx-box');
 
-    // Remove the simulate button
+    if (rainfallMm >= policy.threshold) {
+        statusEl.className = 'payout-status triggered';
+        msgEl.textContent = `Payout Sent — ${policy.payout} DEMO RALO`;
+        detailEl.textContent = `Rainfall (${rainfallMm.toFixed(1)} mm) exceeded threshold. Funds transferred.`;
+
+        txBox.style.display = 'block';
+        document.getElementById('tx-hash').textContent = fakeTxHash();
+        document.getElementById('tx-farmer').textContent = connectedWallet || policy.wallet;
+        document.getElementById('tx-amount').textContent = `${policy.payout} DEMO RALO`;
+        document.getElementById('tx-block').textContent = `#${currentBlock.toLocaleString()}`;
+        document.getElementById('tx-fee').textContent = '0.000021 DEMO RALO';
+    } else {
+        statusEl.className = 'payout-status not-met';
+        msgEl.textContent = 'Condition Not Met — No Payout';
+        detailEl.textContent = `Rainfall (${rainfallMm.toFixed(1)} mm) below threshold (${policy.threshold} mm).`;
+    }
+}
+
+// ── Demo helper: simulate payout ────────────────────────────
+async function simulateTrigger(actualRain) {
+    const statusEl = document.getElementById('payout-status');
     const btn = statusEl.querySelector('button');
     if (btn) btn.remove();
 
-    iconEl.textContent = '<span class="spin">⟳</span>';
-    msgEl.textContent = 'Simulating threshold breach…';
-    detailEl.textContent = '';
+    statusEl.textContent = 'Simulating threshold breach...';
 
     await sleep(1200);
 
     const fakeRain = policy.threshold + 5 + Math.floor(Math.random() * 20);
 
+    statusEl.innerHTML = '';
     statusEl.className = 'payout-status triggered';
-    iconEl.textContent = '';
-    msgEl.textContent = `Payout Sent — ${policy.payout} DEMO RALO`;
-    detailEl.innerHTML = `<em>[Demo mode]</em> Simulated rainfall: ${fakeRain} mm &gt; threshold ${policy.threshold} mm.<br/>Contract auto-transferred funds.`;
 
-    const hash2 = fakeTxHash();
-    const company2 = connectedWallet || policy.wallet;
+    const msgEl = document.getElementById('payout-message');
+    const detailEl = document.getElementById('payout-detail');
+    msgEl.textContent = `Payout Sent — ${policy.payout} DEMO RALO`;
+    detailEl.textContent = '[Demo] Simulated rainfall: ' + fakeRain + ' mm > threshold ' + policy.threshold + ' mm.';
+
+    const txBox = document.getElementById('tx-box');
     txBox.style.display = 'block';
-    document.getElementById('tx-hash').textContent = hash2;
-    document.getElementById('tx-farmer').textContent = company2;
+    document.getElementById('tx-hash').textContent = fakeTxHash();
+    document.getElementById('tx-farmer').textContent = connectedWallet || policy.wallet;
     document.getElementById('tx-amount').textContent = `${policy.payout} DEMO RALO`;
     document.getElementById('tx-block').textContent = `#${currentBlock.toLocaleString()}`;
-    document.getElementById('tx-fee').textContent = `0.000021 DEMO RALO`;
-    document.getElementById('tx-explorer').href = `https://explorer.rialo.io/tx/${hash2}`;
+    document.getElementById('tx-fee').textContent = '0.000021 DEMO RALO';
 }
