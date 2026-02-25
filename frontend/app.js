@@ -210,7 +210,15 @@ async function simulateTrigger(actualRain) {
 
     const fakeRain = policy.threshold + 5 + Math.floor(Math.random() * 20);
 
+    // Update display with payout result
     statusEl.className = 'payout-status triggered';
+    msgEl.textContent = `Payout Sent — ${policy.payout} DEMO RALO`;
+    detailEl.textContent = `Rainfall (${fakeRain.toFixed(1)} mm) exceeded threshold (${policy.threshold} mm). Funds transferred.`;
+
+    // Update transaction box
+    const txBox = document.getElementById('tx-box');
+    txBox.style.display = 'block';
+    document.getElementById('tx-hash').textContent = fakeTxHash();
     document.getElementById('tx-farmer').textContent = connectedWallet || policy.wallet;
     document.getElementById('tx-amount').textContent = `${policy.payout} DEMO RALO`;
     document.getElementById('tx-block').textContent = `#${currentBlock.toLocaleString()}`;
