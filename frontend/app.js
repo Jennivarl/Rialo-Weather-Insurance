@@ -136,9 +136,12 @@ async function checkWeather() {
         document.getElementById('step3').classList.remove('locked');
         document.getElementById('step3').classList.add('unlocked');
 
-        const statusEl = document.getElementById('payout-status');
-        statusEl.textContent = 'Backend service initializing. Click below for demo.';
+        const msgEl = document.getElementById('payout-message');
+        const detailEl = document.getElementById('payout-detail');
+        msgEl.textContent = 'Backend service initializing. Click below for demo.';
+        detailEl.textContent = '';
 
+        const statusEl = document.getElementById('payout-status');
         const demoBtn = document.createElement('button');
         demoBtn.className = 'btn-primary';
         demoBtn.style.marginTop = '20px';
@@ -198,23 +201,16 @@ async function simulateTrigger(actualRain) {
     const btn = statusEl.querySelector('button');
     if (btn) btn.remove();
 
-    statusEl.textContent = 'Simulating threshold breach...';
+    const msgEl = document.getElementById('payout-message');
+    const detailEl = document.getElementById('payout-detail');
+    msgEl.textContent = 'Simulating threshold breach...';
+    detailEl.textContent = '';
 
     await sleep(1200);
 
     const fakeRain = policy.threshold + 5 + Math.floor(Math.random() * 20);
 
-    statusEl.innerHTML = '';
     statusEl.className = 'payout-status triggered';
-
-    const msgEl = document.getElementById('payout-message');
-    const detailEl = document.getElementById('payout-detail');
-    msgEl.textContent = `Payout Sent — ${policy.payout} DEMO RALO`;
-    detailEl.textContent = '[Demo] Simulated rainfall: ' + fakeRain + ' mm > threshold ' + policy.threshold + ' mm.';
-
-    const txBox = document.getElementById('tx-box');
-    txBox.style.display = 'block';
-    document.getElementById('tx-hash').textContent = fakeTxHash();
     document.getElementById('tx-farmer').textContent = connectedWallet || policy.wallet;
     document.getElementById('tx-amount').textContent = `${policy.payout} DEMO RALO`;
     document.getElementById('tx-block').textContent = `#${currentBlock.toLocaleString()}`;
