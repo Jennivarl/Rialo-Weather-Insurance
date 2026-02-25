@@ -53,7 +53,7 @@ function connectWallet() {
     const btn = document.getElementById('walletBtn');
     if (connectedWallet) return; // already connected
 
-    // Generate wallet address immediately
+    // Generate wallet address immediately (SOL-style base58)
     const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     let addr = '';
     for (let i = 0; i < 44; i++) {
@@ -61,8 +61,8 @@ function connectWallet() {
     }
     connectedWallet = addr;
 
-    // Show shortened address on button
-    btn.textContent = `✓ ${addr.slice(0, 6)}…${addr.slice(-6)}`;
+    // Show SOL address format with green checkmark: ✓ 9B5X6…rXpJ
+    btn.textContent = `✓ ${addr.slice(0, 5)}…${addr.slice(-4)}`;
     btn.classList.add('connected');
     btn.disabled = true; // disable after connecting
 }
@@ -106,7 +106,7 @@ async function setupPolicy() {
     if (isNaN(payout) || payout < 1) return alert('Enter a valid payout amount.');
     if (payout > 200) return alert('Payout must be at most 200 RALO tokens.');
 
-    setLoading(null, true, null);
+    // Disable button and show loading state
     const btn = document.querySelector('#step1 .btn-primary');
     btn.disabled = true;
     btn.innerHTML = '<span class="spin">⟳</span> Deploying contract…';
