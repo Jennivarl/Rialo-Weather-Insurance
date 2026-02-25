@@ -40,11 +40,9 @@ function autoConnectWallet() {
 
 // Trigger auto-connect when DOM is ready
 if (document.readyState !== 'loading') {
-    setTimeout(autoConnectWallet, 100);
+    autoConnectWallet();
 } else {
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(autoConnectWallet, 100);
-    });
+    document.addEventListener('DOMContentLoaded', autoConnectWallet);
 }
 
 // ── Connect Wallet (simulated — no real wallet on DevNet) ─────
@@ -65,11 +63,6 @@ function connectWallet() {
     btn.classList.add('connected');
     btn.disabled = true; // disable after connecting
 }
-
-// ── Auto-connect wallet on page load ─────────────────────────
-window.addEventListener('load', () => {
-    connectWallet();
-});
 
 // ── Utility helpers ───────────────────────────────────────────
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PayOnRain — Automated Weather Insurance</title>
-    <link rel="stylesheet" href="style.css?v=14" />
+    <link rel="stylesheet" href="style.css?v=15" />
 </head>
 
 <body>
@@ -38,8 +38,8 @@
             <div class="block-counter">
                 Block <span id="block-num">—</span>
             </div>
-            <button class="btn-wallet" id="walletBtn" onclick="connectWallet()">
-                Connect Wallet
+            <button class="btn-wallet connected" id="walletBtn" onclick="connectWallet()" disabled>
+                ✓ Wallet Connected
             </button>
         </div>
     </header>
@@ -66,7 +66,7 @@
             </div>
 
             <button class="btn-primary" onclick="setupPolicy()">
-                Create Policy &amp; Deposit Funds
+                Create Policy
             </button>
 
             <div class="output" id="step1-output" style="display:none"></div>
@@ -155,7 +155,7 @@
         Built on <strong>Rialo DevNet</strong> · Powered by <strong>Subzero Labs</strong> · rialo.io
     </footer>
 
-    <script src="app.js?v=14"></script>
+    <script src="app.js?v=15"></script>
 </body>
 
 </html>
