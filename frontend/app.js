@@ -16,18 +16,21 @@ let currentBlock = 8_412_047;  // realistic Rialo DevNet block number
 function startBlockCounter() {
     const el = document.getElementById('block-num');
     if (!el) return;
+
+    // Display initial block number immediately
     el.textContent = currentBlock.toLocaleString();
+
+    // Update block number every 3.5 seconds
     setInterval(() => {
         currentBlock += Math.random() < 0.7 ? 1 : 0; // occasional skip = realistic
         el.textContent = currentBlock.toLocaleString();
     }, 3500);
 }
 
-// Start block counter immediately when DOM is ready
-if (document.readyState !== 'loading') {
+// Ensure block counter runs after DOM is fully loaded
+document.addEventListener('DOMContentLoaded', startBlockCounter);
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
     startBlockCounter();
-} else {
-    document.addEventListener('DOMContentLoaded', startBlockCounter);
 }
 
 // ── Auto-connect wallet on page load ─────────────────────────
