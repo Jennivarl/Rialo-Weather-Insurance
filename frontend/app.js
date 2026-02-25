@@ -196,7 +196,7 @@ async function checkWeather() {
 }
 
 // ── Demo helper: simulate payout ────────────────────────────
-async function simulateTrigger(actualRain) {
+function simulateTrigger(actualRain) {
     const statusEl = document.getElementById('payout-status');
     const btn = statusEl.querySelector('button');
     if (btn) btn.remove();
@@ -206,21 +206,28 @@ async function simulateTrigger(actualRain) {
     msgEl.textContent = 'Simulating threshold breach...';
     detailEl.textContent = '';
 
-    await sleep(1200);
+    // Use setTimeout instead of async/await to avoid potential issues
+    setTimeout(() => {
+        try {
+            const fakeRain = policy.threshold + 5 + Math.floor(Math.random() * 20);
 
-    const fakeRain = policy.threshold + 5 + Math.floor(Math.random() * 20);
+            // Update display with payout result
+            statusEl.className = 'payout-status triggered';
+            msgEl.textContent = `Payout Sent — ${policy.payout} DEMO RALO`;
+            detailEl.textContent = `Rainfall (${fakeRain.toFixed(1)} mm) exceeded threshold (${policy.threshold} mm). Funds transferred.`;
 
-    // Update display with payout result
-    statusEl.className = 'payout-status triggered';
-    msgEl.textContent = `Payout Sent — ${policy.payout} DEMO RALO`;
-    detailEl.textContent = `Rainfall (${fakeRain.toFixed(1)} mm) exceeded threshold (${policy.threshold} mm). Funds transferred.`;
-
-    // Update transaction box
-    const txBox = document.getElementById('tx-box');
-    txBox.style.display = 'block';
-    document.getElementById('tx-hash').textContent = fakeTxHash();
-    document.getElementById('tx-farmer').textContent = connectedWallet || policy.wallet;
-    document.getElementById('tx-amount').textContent = `${policy.payout} DEMO RALO`;
-    document.getElementById('tx-block').textContent = `#${currentBlock.toLocaleString()}`;
-    document.getElementById('tx-fee').textContent = '0.000021 DEMO RALO';
+            // Update transaction box
+            const txBox = document.getElementById('tx-box');
+            txBox.style.display = 'block';
+            document.getElementById('tx-hash').textContent = fakeTxHash();
+            document.getElementById('tx-farmer').textContent = connectedWallet || policy.wallet;
+            document.getElementById('tx-amount').textContent = `${policy.payout} DEMO RALO`;
+            document.getElementById('tx-block').textContent = `#${currentBlock.toLocaleString()}`;
+            document.getElementById('tx-fee').textContent = '0.000021 DEMO RALO';
+        } catch (e) {
+            console.error('Error in simulateTrigger:', e);
+            msgEl.textContent = 'Error simulating payout';
+            detailEl.textContent = e.message;
+        }
+    }, 1200);
 }
