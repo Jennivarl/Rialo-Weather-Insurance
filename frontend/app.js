@@ -197,19 +197,39 @@ async function checkWeather() {
 
 // ── Demo helper: simulate payout ────────────────────────────
 function simulateTrigger(actualRain) {
+    console.log('simulateTrigger called with policy:', policy);
+
     const statusEl = document.getElementById('payout-status');
     const btn = statusEl.querySelector('button');
     if (btn) btn.remove();
 
     const msgEl = document.getElementById('payout-message');
     const detailEl = document.getElementById('payout-detail');
+    if (!msgEl || !detailEl) {
+        console.error('Cannot find payout-message or payout-detail elements');
+        return;
+    }
+
     msgEl.textContent = 'Simulating threshold breach...';
     detailEl.textContent = '';
 
     // Use setTimeout instead of async/await to avoid potential issues
     setTimeout(() => {
+        console.log('setTimeout fired - updating UI');
         try {
+            // Re-fetch elements to ensure they're current
+            const msgEl = document.getElementById('payout-message');
+            const detailEl = document.getElementById('payout-detail');
+            const statusEl = document.getElementById('payout-status');
+            const txBox = document.getElementById('tx-box');
+
+            if (!msgEl || !detailEl || !statusEl || !txBox) {
+                console.error('Missing DOM elements:', { msgEl, detailEl, statusEl, txBox });
+                return;
+            }
+
             const fakeRain = policy.threshold + 5 + Math.floor(Math.random() * 20);
+            console.log('Fake rain:', fakeRain, 'Threshold:', policy.threshold, 'Payout:', policy.payout);
 
             // Update display with payout result
             statusEl.className = 'payout-status triggered';
@@ -217,17 +237,17 @@ function simulateTrigger(actualRain) {
             detailEl.textContent = `Rainfall (${fakeRain.toFixed(1)} mm) exceeded threshold (${policy.threshold} mm). Funds transferred.`;
 
             // Update transaction box
-            const txBox = document.getElementById('tx-box');
             txBox.style.display = 'block';
             document.getElementById('tx-hash').textContent = fakeTxHash();
             document.getElementById('tx-farmer').textContent = connectedWallet || policy.wallet;
             document.getElementById('tx-amount').textContent = `${policy.payout} DEMO RALO`;
             document.getElementById('tx-block').textContent = `#${currentBlock.toLocaleString()}`;
             document.getElementById('tx-fee').textContent = '0.000021 DEMO RALO';
+
+            console.log('Payout simulation complete');
         } catch (e) {
-            console.error('Error in simulateTrigger:', e);
-            msgEl.textContent = 'Error simulating payout';
-            detailEl.textContent = e.message;
+            console.error('Error in simulateTrigger setTimeout:', e, e.stack);
+            document.getElementById('payout-message').textContent = 'Error: ' + e.message;
         }
     }, 1200);
 }
