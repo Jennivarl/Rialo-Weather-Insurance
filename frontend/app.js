@@ -12,45 +12,32 @@ let txCount = 1000;       // fake block counter for demo
 let connectedWallet = null;    // set in connectWallet()
 let currentBlock = 8_412_047;  // realistic Rialo DevNet block number
 
-// ── Live block counter (ticks up every ~3.5 seconds) ─────────
-function startBlockCounter() {
-    const el = document.getElementById('block-num');
-    if (!el) return;
+// ── Initialization: Run after DOM is fully ready ─────────────
+function initializeApp() {
+    // Initialize block counter
+    const blockEl = document.getElementById('block-num');
+    if (blockEl) {
+        blockEl.textContent = currentBlock.toLocaleString();
+        setInterval(() => {
+            currentBlock += Math.random() < 0.7 ? 1 : 0;
+            blockEl.textContent = currentBlock.toLocaleString();
+        }, 3500);
+    }
 
-    // Display initial block number immediately
-    el.textContent = currentBlock.toLocaleString();
-
-    // Update block number every 3.5 seconds
-    setInterval(() => {
-        currentBlock += Math.random() < 0.7 ? 1 : 0; // occasional skip = realistic
-        el.textContent = currentBlock.toLocaleString();
-    }, 3500);
-}
-
-// Ensure block counter runs after DOM is fully loaded
-document.addEventListener('DOMContentLoaded', startBlockCounter);
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    startBlockCounter();
-}
-
-// ── Auto-connect wallet on page load ─────────────────────────
-function autoConnectWallet() {
-    const btn = document.getElementById('walletBtn');
-    if (btn && !connectedWallet) {
+    // Auto-connect wallet
+    const walletBtn = document.getElementById('walletBtn');
+    if (walletBtn && !connectedWallet) {
         connectWallet();
     }
 }
 
-// Trigger auto-connect when DOM is ready
-if (document.readyState !== 'loading') {
-    autoConnectWallet();
-} else {
-    document.addEventListener('DOMContentLoaded', autoConnectWallet);
-}
+// Run initialization after DOM is completely ready
+document.addEventListener('DOMContentLoaded', initializeApp);
 
 // ── Connect Wallet (simulated — no real wallet on DevNet) ─────
 function connectWallet() {
     const btn = document.getElementById('walletBtn');
+    const display = document.getElementById('wallet-display');
     if (connectedWallet) return; // already connected
 
     // Generate wallet address immediately (SOL-style base58)
@@ -61,8 +48,10 @@ function connectWallet() {
     }
     connectedWallet = addr;
 
-    // Show SOL address format with green checkmark: ✓ 9B5X6…rXpJ
-    btn.textContent = `✓ ${addr.slice(0, 5)}…${addr.slice(-4)}`;
+    // Show SOL address format in the span
+    if (display) {
+        display.textContent = `✓ ${addr.slice(0, 5)}…${addr.slice(-4)}`;
+    }
     btn.classList.add('connected');
     btn.disabled = true; // disable after connecting
 }
