@@ -1,0 +1,25 @@
+# Vercel deployment ignore file
+# Ignore files not needed for frontend deployment
+
+node_modules/
+.git
+.gitignore
+.env.local
+.env.*.local
+.turbo
+.cache
+dist
+build
+
+# Backend folder - not needed for Vercel
+prototype/
+contract/
+
+# Documentation
+README.md
+DEPLOYMENT.md
+FIGMA_*.md
+
+# OS files
+.DS_Store
+Thumbs.db

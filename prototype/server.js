@@ -393,18 +393,8 @@ app.post('/payout', async (req, res) => {
     }
 });
 
-// Serve static files (built React frontend first, then fallback to public)
-const frontendPath = path.join(__dirname, '../frontend-react/dist');
-const publicPath = path.join(__dirname, 'public');
-
-if (fs.existsSync(frontendPath)) {
-    app.use(express.static(frontendPath));
-    // Serve index.html for React Router (SPA)
-    app.get('/', (req, res) => {
-        res.sendFile(path.join(frontendPath, 'index.html'));
-    });
-}
-app.use(express.static(publicPath));
+// Serve static files AFTER API routes
+app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT} (pubkey available at /pubkey)`));

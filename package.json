@@ -3,18 +3,18 @@
     "version": "1.0.0",
     "description": "Parametric weather insurance platform - PayOnRain",
     "private": true,
+    "workspaces": [
+        "frontend-react",
+        "prototype"
+    ],
     "scripts": {
-        "install:all": "npm install && cd frontend-react && npm install && cd ../prototype && npm install",
-        "build": "cd frontend-react && npm run build && cd ../prototype && npm install",
-        "start": "cd prototype && npm start",
-        "dev": "concurrently \"cd frontend-react && npm run dev\" \"cd prototype && npm start\"",
-        "backend": "cd prototype && npm start",
-        "frontend": "cd frontend-react && npm run dev"
-    },
-    "dependencies": {
-        "concurrently": "^8.2.0"
+        "dev:local": "concurrently \"cd frontend-react && npm run dev\" \"cd prototype && npm start\"",
+        "install:all": "npm install && cd frontend-react && npm install && cd ../prototype && npm install"
     },
     "engines": {
         "node": ">=18.0.0"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.0"
     }
 }
