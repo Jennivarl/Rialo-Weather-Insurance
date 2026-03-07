@@ -2,17 +2,28 @@
     "name": "rialo-weather-insurance",
     "version": "1.0.0",
     "description": "Parametric weather insurance platform - PayOnRain",
+    "main": "server.js",
     "private": true,
-    "workspaces": [
-        "frontend-react",
-        "prototype"
-    ],
     "scripts": {
-        "dev:local": "concurrently \"cd frontend-react && npm run dev\" \"cd prototype && npm start\"",
-        "install:all": "npm install && cd frontend-react && npm install && cd ../prototype && npm install"
+        "start": "node server.js",
+        "worker": "node worker.js",
+        "dev": "concurrently \"node server.js\" \"node worker.js\""
     },
     "engines": {
         "node": ">=18.0.0"
+    },
+    "dependencies": {
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "tweetnacl": "^1.0.3",
+        "tweetnacl-util": "^0.15.1",
+        "uuid": "^9.0.0",
+        "@solana/web3.js": "^1.87.6",
+        "@solana/spl-token": "^0.4.8"
+    },
+    "devDependencies": {
+        "concurrently": "^9.2.1"
     },
     "devDependencies": {
         "concurrently": "^8.2.0"

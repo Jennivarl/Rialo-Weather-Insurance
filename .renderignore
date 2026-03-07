@@ -1,23 +1,11 @@
-# Render deployment ignore file - for backend (prototype)
-# Only include prototype folder
+# Render deployment - backend at root
+# Exclude frontend and docs only
 
-node_modules/
-.git
-.gitignore
-.turbo
-.cache
-
-# Frontend folder - not needed for Render
 frontend/
-frontend-react/
 contract/
-
-# Documentation
-README.md
 DEPLOYMENT.md
 FIGMA_*.md
-
-# OS files
+README.md
 .DS_Store
 Thumbs.db
 

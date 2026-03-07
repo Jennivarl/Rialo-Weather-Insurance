@@ -1,0 +1,20 @@
+[
+  {
+    "id": "TXN-1772741991877-TDZEPU",
+    "policy_id": "POL-1772741965167-FW07O5",
+    "transaction_id": "TXN-1772741991877-TFZAAI",
+    "amount": 250,
+    "status": "completed",
+    "payout_method": "Bank Account",
+    "timestamp": "2026-03-05T20:19:51.877Z"
+  },
+  {
+    "id": "TXN-1772742777059-OFW17W",
+    "policy_id": "POL-1772742767034-28C62J",
+    "transaction_id": "TXN-1772742777059-DTE7EM",
+    "amount": 370,
+    "status": "completed",
+    "payout_method": "Bank Account",
+    "timestamp": "2026-03-05T20:32:57.059Z"
+  }
+]
