@@ -1,0 +1,14 @@
+{
+    "buildCommand": "npm install && cd frontend && npm install && npm run build && cd .. && ls -la",
+    "outputDirectory": "frontend/dist",
+    "functions": {
+        "api/**/*.js": {
+            "memory": 1024,
+            "maxDuration": 60,
+            "runtime": "nodejs20.x"
+        }
+    },
+    "env": {
+        "VITE_API_URL": "/api"
+    }
+}
