@@ -1,7 +1,1 @@
-{
-    "buildCommand": "npm install && cd frontend && npm install && npm run build",
-    "roots": {
-        "api": "api",
-        "web": "frontend/dist"
-    }
-}
+{}
