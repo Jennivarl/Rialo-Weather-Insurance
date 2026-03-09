@@ -1,5 +1,4 @@
 # Vercel deployment ignore file
-# Ignore files not needed for frontend deployment
 
 node_modules/
 .git
@@ -8,10 +7,9 @@ node_modules/
 .env.*.local
 .turbo
 .cache
-dist
 build
 
-# Backend folder - not needed for Vercel
+# Backend folders - not needed for Vercel
 prototype/
 contract/
 
