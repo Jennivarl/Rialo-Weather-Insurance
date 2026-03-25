@@ -4,9 +4,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
 COPY . .
-# VITE_API_URL is injected at build time via Railway env var
+# VITE_* vars are injected at build time via Railway env vars
 ARG VITE_API_URL
 ENV VITE_API_URL=$VITE_API_URL
+ARG VITE_PRIVY_APP_ID
+ENV VITE_PRIVY_APP_ID=$VITE_PRIVY_APP_ID
 RUN npm run build
 
 # Stage 2: Serve with nginx
