@@ -105,7 +105,7 @@ export function PayOnRainAppWithBackend() {
         .then(res => {
           if (res.success) {
             localStorage.setItem(faucetKey, 'true');
-            toast.success('🎉 $10 USDC added to your wallet to get started!');
+            toast.success('🎉 $10 devnet USDC faucet added — this is test money, not real USDC!');
             apiClient.getBalance(walletAddress).then(b => setWalletBalance(b)).catch(() => { });
           }
         })
@@ -251,6 +251,10 @@ export function PayOnRainAppWithBackend() {
 
   return (
     <div className="min-h-screen bg-[#E8F0FA]">
+      {/* Demo mode banner */}
+      <div className="bg-amber-400 text-amber-900 text-center text-[13px] font-medium py-2 px-4">
+        ⚠️ Demo Mode — This app runs on <strong>Solana Devnet</strong>. All USDC is test money with no real value.
+      </div>
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-md border-b border-[#e0dcd4] sticky top-0 z-50 shadow-sm">
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 py-4 flex items-center justify-between">
