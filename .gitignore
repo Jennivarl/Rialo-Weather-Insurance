@@ -24,6 +24,9 @@ out/
 *~
 .DS_Store
 
+# Solana treasury keypair — NEVER commit this
+solana-treasury.json
+
 # Logs
 logs/
 *.log

@@ -8,7 +8,8 @@
         "start": "node server.js",
         "worker": "node worker.js",
         "dev": "concurrently \"node server.js\" \"node worker.js\"",
-        "build": "cd frontend && npm install && npm run build"
+        "build": "cd frontend && npm install && npm run build",
+        "setup-devnet": "node setup-devnet.js"
     },
     "engines": {
         "node": ">=18.0.0"
@@ -25,8 +26,5 @@
     },
     "devDependencies": {
         "concurrently": "^9.2.1"
-    },
-    "devDependencies": {
-        "concurrently": "^8.2.0"
     }
 }

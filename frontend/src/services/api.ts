@@ -1,23 +1,28 @@
-// API configuration
+﻿// API configuration
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
-// Types matching your Rust backend
 export interface CreatePolicyRequest {
   city: string;
   threshold: number;
   payout: number;
+  walletAddress?: string;
+  weather_type?: 'rainfall' | 'temperature' | 'wind';
+  trigger_direction?: 'above' | 'below';
+  coverage_days?: number;
+  lat?: number;
+  lon?: number;
 }
 
 export interface PolicyResponse {
   id: string;
   city: string;
+  location?: string;
   threshold: number;
   payout: number;
+  weather_type: string;
+  trigger_direction: string;
+  coverage_days: number;
   created_at: string;
-}
-
-export interface WeatherCheckRequest {
-  policy_id: string;
 }
 
 export interface WeatherResponse {
@@ -27,6 +32,10 @@ export interface WeatherResponse {
   condition: string;
   temperature: string;
   triggered: boolean;
+  weather_type: string;
+  trigger_direction: string;
+  coverage_days: number;
+  unit: string;
 }
 
 export interface PayoutRequest {
@@ -39,9 +48,21 @@ export interface PayoutResponse {
   amount: number;
   status: string;
   payout_method: string;
+  solana_explorer_url?: string | null;
 }
 
-// API Client
+export interface BalanceResponse {
+  sol: number;
+  usdc: number;
+}
+
+export interface FaucetResponse {
+  success: boolean;
+  transaction_id: string;
+  amount: number;
+  solana_explorer_url?: string;
+}
+
 class ApiClient {
   private baseURL: string;
 
@@ -49,51 +70,37 @@ class ApiClient {
     this.baseURL = baseURL;
   }
 
-  private async request<T>(
-    endpoint: string,
-    options?: RequestInit
-  ): Promise<T> {
+  private async request<T>(endpoint: string, options?: RequestInit): Promise<T> {
     const url = `${this.baseURL}${endpoint}`;
-
     const response = await fetch(url, {
       ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options?.headers,
-      },
+      headers: { 'Content-Type': 'application/json', ...options?.headers },
     });
-
     if (!response.ok) {
-      const error = await response.json().catch(() => ({
-        message: response.statusText,
-      }));
-      throw new Error(error.message || 'API request failed');
+      const error = await response.json().catch(() => ({ message: response.statusText }));
+      throw new Error(error.message || error.error || error.details || `API error ${response.status}`);
     }
-
     return response.json();
   }
 
-  // Create a new policy
   async createPolicy(data: CreatePolicyRequest): Promise<PolicyResponse> {
-    return this.request<PolicyResponse>('/policies', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
+    return this.request<PolicyResponse>('/policies', { method: 'POST', body: JSON.stringify(data) });
   }
 
-  // Check weather for a policy
   async checkWeather(policyId: string): Promise<WeatherResponse> {
-    return this.request<WeatherResponse>(`/weather/${policyId}`, {
-      method: 'GET',
-    });
+    return this.request<WeatherResponse>(`/weather/${policyId}`, { method: 'GET' });
   }
 
-  // Process payout
   async processPayout(data: PayoutRequest): Promise<PayoutResponse> {
-    return this.request<PayoutResponse>('/payouts', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
+    return this.request<PayoutResponse>('/payouts', { method: 'POST', body: JSON.stringify(data) });
+  }
+
+  async getBalance(walletAddress: string): Promise<BalanceResponse> {
+    return this.request<BalanceResponse>(`/balance/${walletAddress}`, { method: 'GET' });
+  }
+
+  async requestFaucet(walletAddress: string): Promise<FaucetResponse> {
+    return this.request<FaucetResponse>('/faucet', { method: 'POST', body: JSON.stringify({ walletAddress }) });
   }
 }
 

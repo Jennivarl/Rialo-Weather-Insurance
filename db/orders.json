@@ -26,5 +26,470 @@
     "threshold": 0.1,
     "payout": 400,
     "created_at": "2026-03-05T20:33:37.473Z"
+  },
+  {
+    "id": "POL-1773090874480-7E9AYA",
+    "city": "Miami",
+    "threshold": 12,
+    "payout": 234,
+    "created_at": "2026-03-09T21:14:34.480Z"
+  },
+  {
+    "id": "POL-1773091193498-H8EUNT",
+    "city": "Miami",
+    "threshold": 12,
+    "payout": 234,
+    "created_at": "2026-03-09T21:19:53.498Z"
+  },
+  {
+    "id": "POL-1773092328553-QJEAO5",
+    "city": "Nairobi ",
+    "threshold": 0.1,
+    "payout": 200,
+    "created_at": "2026-03-09T21:38:48.553Z"
+  },
+  {
+    "id": "POL-1773092371948-477I5R",
+    "city": "london",
+    "threshold": 0.1,
+    "payout": 200,
+    "created_at": "2026-03-09T21:39:31.948Z"
+  },
+  {
+    "id": "POL-1773093020975-FV2D3U",
+    "city": "Benin",
+    "threshold": 0.1,
+    "payout": 350,
+    "created_at": "2026-03-09T21:50:20.975Z"
+  },
+  {
+    "id": "POL-1773093060113-F3KTYW",
+    "city": "Benin City",
+    "threshold": 0.1,
+    "payout": 350,
+    "created_at": "2026-03-09T21:51:00.113Z"
+  },
+  {
+    "id": "POL-1773093729248-4IBWQA",
+    "city": "Vancouver ",
+    "threshold": 0.1,
+    "payout": 123,
+    "created_at": "2026-03-09T22:02:09.248Z"
+  },
+  {
+    "id": "POL-1773093854022-554IDA",
+    "city": "kualar lumpur",
+    "threshold": 0.1,
+    "payout": 230,
+    "created_at": "2026-03-09T22:04:14.022Z"
+  },
+  {
+    "id": "POL-1773850337348-PAJIUB",
+    "city": "Nairobi ",
+    "threshold": 0.1,
+    "payout": 150,
+    "created_at": "2026-03-18T16:12:17.348Z"
+  },
+  {
+    "id": "POL-1773850576307-ZQEWNI",
+    "city": "Delhi ",
+    "threshold": 0.1,
+    "payout": 500,
+    "created_at": "2026-03-18T16:16:16.307Z"
+  },
+  {
+    "id": "POL-1773850638591-OEWZWU",
+    "city": "Manilla ",
+    "threshold": 0.1,
+    "payout": 400,
+    "created_at": "2026-03-18T16:17:18.591Z"
+  },
+  {
+    "id": "POL-1773850883376-ZXYATC",
+    "city": "Manilla ",
+    "threshold": 0.1,
+    "payout": 300,
+    "created_at": "2026-03-18T16:21:23.376Z"
+  },
+  {
+    "id": "POL-1773851024235-4T9XB2",
+    "city": "Manilla ",
+    "threshold": 0.1,
+    "payout": 350,
+    "created_at": "2026-03-18T16:23:44.235Z"
+  },
+  {
+    "id": "POL-1773851096473-MIMZT5",
+    "city": "Manilla ",
+    "threshold": 0.1,
+    "payout": 450,
+    "created_at": "2026-03-18T16:24:56.473Z"
+  },
+  {
+    "id": "POL-1773851162664-KNJI8B",
+    "city": "Miami",
+    "threshold": 10,
+    "payout": 100,
+    "created_at": "2026-03-18T16:26:02.664Z"
+  },
+  {
+    "id": "POL-1773851288408-EFXJA8",
+    "city": "Manila",
+    "threshold": 10,
+    "payout": 100,
+    "created_at": "2026-03-18T16:28:08.408Z"
+  },
+  {
+    "id": "POL-1773851517380-FNN5V8",
+    "city": "Manilla ",
+    "threshold": 0.1,
+    "payout": 4555,
+    "created_at": "2026-03-18T16:31:57.380Z"
+  },
+  {
+    "id": "POL-1773851538897-MGYNHD",
+    "city": "Dubai",
+    "threshold": 67,
+    "payout": 500,
+    "created_at": "2026-03-18T16:32:18.897Z"
+  },
+  {
+    "id": "POL-1773851839214-EC0JSH",
+    "city": "Darwin",
+    "threshold": 0.1,
+    "payout": 600,
+    "created_at": "2026-03-18T16:37:19.214Z"
+  },
+  {
+    "id": "POL-1773851886556-BLPBWF",
+    "city": "Taichung",
+    "threshold": 0.1,
+    "payout": 300,
+    "created_at": "2026-03-18T16:38:06.556Z"
+  },
+  {
+    "id": "POL-1773852100682-BPRA69",
+    "city": "Abidjan ",
+    "threshold": 0.1,
+    "payout": 150,
+    "created_at": "2026-03-18T16:41:40.682Z"
+  },
+  {
+    "id": "POL-1773852131498-M472QU",
+    "city": "Cebu ",
+    "threshold": 0.1,
+    "payout": 200,
+    "created_at": "2026-03-18T16:42:11.498Z"
+  },
+  {
+    "id": "POL-1773852192760-Q6WZZ8",
+    "city": "kubwa",
+    "threshold": 0.1,
+    "payout": 400,
+    "created_at": "2026-03-18T16:43:12.760Z"
+  },
+  {
+    "id": "POL-1773852249054-JIGBQC",
+    "city": "india",
+    "threshold": 0.1,
+    "payout": 300,
+    "created_at": "2026-03-18T16:44:09.054Z"
+  },
+  {
+    "id": "POL-1773852424164-OIYN7C",
+    "city": "Taichung",
+    "threshold": 0,
+    "payout": 100,
+    "created_at": "2026-03-18T16:47:04.164Z"
+  },
+  {
+    "id": "POL-1773853565740-VAKIXF",
+    "city": "Manilla ",
+    "threshold": 0.1,
+    "payout": 100,
+    "created_at": "2026-03-18T17:06:05.740Z"
+  },
+  {
+    "id": "POL-1773853588192-ONU9Y2",
+    "city": "Manali ",
+    "threshold": 0.1,
+    "payout": 200,
+    "created_at": "2026-03-18T17:06:28.192Z"
+  },
+  {
+    "id": "POL-1773853640284-2QPLYS",
+    "city": "london",
+    "threshold": 0.0001,
+    "payout": 450,
+    "created_at": "2026-03-18T17:07:20.284Z"
+  },
+  {
+    "id": "POL-1773853788820-BZPCTE",
+    "city": "Manila",
+    "threshold": 0.01,
+    "payout": 100,
+    "created_at": "2026-03-18T17:09:48.820Z"
+  },
+  {
+    "id": "POL-1773854081880-VN69W6",
+    "city": "Manilla ",
+    "threshold": 0.1,
+    "payout": 100,
+    "created_at": "2026-03-18T17:14:41.880Z"
+  },
+  {
+    "id": "POL-1773854102747-VB8XM3",
+    "city": "london",
+    "threshold": 10,
+    "payout": 200,
+    "created_at": "2026-03-18T17:15:02.747Z"
+  },
+  {
+    "id": "POL-1773921016158-FT0EZF",
+    "city": "Manila",
+    "threshold": 0.01,
+    "payout": 100,
+    "created_at": "2026-03-19T11:50:16.158Z"
+  },
+  {
+    "id": "POL-1773921952770-DWSPYW",
+    "city": "Manila",
+    "threshold": 0.01,
+    "payout": 100,
+    "created_at": "2026-03-19T12:05:52.770Z"
+  },
+  {
+    "id": "POL-1773923501972-UA0BZW",
+    "city": "London",
+    "threshold": 0.1,
+    "payout": 500,
+    "created_at": "2026-03-19T12:31:41.972Z"
+  },
+  {
+    "id": "POL-1773923823758-FQGZC3",
+    "city": "Tokyo",
+    "threshold": 1,
+    "payout": 200,
+    "created_at": "2026-03-19T12:37:03.758Z"
+  },
+  {
+    "id": "POL-1773924260130-BPS7XJ",
+    "city": "Nairobi ",
+    "threshold": 0.1,
+    "payout": 100,
+    "created_at": "2026-03-19T12:44:20.130Z"
+  },
+  {
+    "id": "POL-1773924473227-P7Y1P7",
+    "city": "Jarkata",
+    "threshold": 0.1,
+    "payout": 400,
+    "created_at": "2026-03-19T12:47:53.227Z"
+  },
+  {
+    "id": "POL-1773924976224-8X1PGV",
+    "city": "Jarkata",
+    "location": "Jarkatānr, India",
+    "latitude": 23.72262,
+    "longitude": 85.87919,
+    "threshold": 0.1,
+    "payout": 100,
+    "created_at": "2026-03-19T12:56:16.224Z"
+  },
+  {
+    "id": "POL-1773925004416-247HBW",
+    "city": "Jarkata",
+    "location": "Jarkatānr, India",
+    "latitude": 23.72262,
+    "longitude": 85.87919,
+    "threshold": 0.1,
+    "payout": 100,
+    "created_at": "2026-03-19T12:56:44.416Z"
+  },
+  {
+    "id": "POL-1773925023914-LDDKJU",
+    "city": "Jakarta",
+    "location": "Sunda Kelapa, Indonesia",
+    "latitude": -6.21462,
+    "longitude": 106.84513,
+    "threshold": 0.5,
+    "payout": 200,
+    "created_at": "2026-03-19T12:57:03.914Z"
+  },
+  {
+    "id": "POL-1773925286820-I2AA3Z",
+    "city": "Jakarta",
+    "location": "Sunda Kelapa, Jakarta, Indonesia",
+    "latitude": -6.21462,
+    "longitude": 106.84513,
+    "threshold": 0.5,
+    "payout": 200,
+    "created_at": "2026-03-19T13:01:26.820Z"
+  },
+  {
+    "id": "POL-1773925961414-XWG19P",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 0.1,
+    "payout": 100,
+    "created_at": "2026-03-19T13:12:41.414Z"
+  },
+  {
+    "id": "POL-1773927235499-D4JU1M",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 0.1,
+    "payout": 360,
+    "created_at": "2026-03-19T13:33:55.499Z"
+  },
+  {
+    "id": "POL-1773927732785-VOFUT4",
+    "city": "Dubai",
+    "location": "Dubai, United Arab Emirates",
+    "latitude": 25.07725,
+    "longitude": 55.30927,
+    "threshold": 0.1,
+    "payout": 400,
+    "created_at": "2026-03-19T13:42:12.785Z"
+  },
+  {
+    "id": "POL-1773974683664-27YQ1F",
+    "city": "Tokyo",
+    "location": "Tokyo, Japan",
+    "latitude": 35.6895,
+    "longitude": 139.69171,
+    "threshold": 0.1,
+    "payout": 50,
+    "walletAddress": "BxxPcwUia7PcBdtczzRQSdR26o2m4eJzHsN3Cjo45fqj",
+    "created_at": "2026-03-20T02:44:43.664Z"
+  },
+  {
+    "id": "POL-1773974707244-Y3UKI7",
+    "city": "Tokyo",
+    "location": "Tokyo, Japan",
+    "latitude": 35.6895,
+    "longitude": 139.69171,
+    "threshold": 0.1,
+    "payout": 50,
+    "walletAddress": "BxxPcwUia7PcBdtczzRQSdR26o2m4eJzHsN3Cjo45fqj",
+    "created_at": "2026-03-20T02:45:07.244Z"
+  },
+  {
+    "id": "POL-1774324175919-DWSIDQ",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 0.1,
+    "payout": 10,
+    "walletAddress": "FRK9afZ5QQJ8uds3ovpmFiVEVTbMYomLjDtR7riz415V",
+    "created_at": "2026-03-24T03:49:35.919Z"
+  },
+  {
+    "id": "POL-1774328072787-CLSP7W",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 0.1,
+    "payout": 10,
+    "walletAddress": "FRK9afZ5QQJ8uds3ovpmFiVEVTbMYomLjDtR7riz415V",
+    "created_at": "2026-03-24T04:54:32.787Z"
+  },
+  {
+    "id": "POL-1774328770330-JGI7DS",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 0.1,
+    "payout": 10,
+    "walletAddress": "FRK9afZ5QQJ8uds3ovpmFiVEVTbMYomLjDtR7riz415V",
+    "created_at": "2026-03-24T05:06:10.330Z"
+  },
+  {
+    "id": "POL-1774331666532-S5YZJ5",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 0.1,
+    "payout": 10,
+    "walletAddress": "FRK9afZ5QQJ8uds3ovpmFiVEVTbMYomLjDtR7riz415V",
+    "created_at": "2026-03-24T05:54:26.532Z"
+  },
+  {
+    "id": "POL-1774407123152-QKW83Q",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 6,
+    "payout": 10,
+    "weather_type": "temperature",
+    "trigger_direction": "below",
+    "coverage_days": 3,
+    "walletAddress": "FRK9afZ5QQJ8uds3ovpmFiVEVTbMYomLjDtR7riz415V",
+    "created_at": "2026-03-25T02:52:03.152Z"
+  },
+  {
+    "id": "POL-1774408016772-K4V56I",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 30,
+    "payout": 10,
+    "weather_type": "temperature",
+    "trigger_direction": "above",
+    "coverage_days": 1,
+    "walletAddress": null,
+    "created_at": "2026-03-25T03:06:56.772Z"
+  },
+  {
+    "id": "POL-1774408032328-A6YTU8",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 10,
+    "payout": 10,
+    "weather_type": "wind",
+    "trigger_direction": "above",
+    "coverage_days": 3,
+    "walletAddress": null,
+    "created_at": "2026-03-25T03:07:12.328Z"
+  },
+  {
+    "id": "POL-1774408261706-MXV6GX",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 6,
+    "payout": 10,
+    "weather_type": "temperature",
+    "trigger_direction": "below",
+    "coverage_days": 3,
+    "walletAddress": "FRK9afZ5QQJ8uds3ovpmFiVEVTbMYomLjDtR7riz415V",
+    "created_at": "2026-03-25T03:11:01.706Z"
+  },
+  {
+    "id": "POL-1774408329903-13TZLY",
+    "city": "Nairobi",
+    "location": "Nairobi, Nairobi County, Kenya",
+    "latitude": -1.28333,
+    "longitude": 36.81667,
+    "threshold": 20,
+    "payout": 10,
+    "weather_type": "temperature",
+    "trigger_direction": "below",
+    "coverage_days": 3,
+    "walletAddress": "FRK9afZ5QQJ8uds3ovpmFiVEVTbMYomLjDtR7riz415V",
+    "created_at": "2026-03-25T03:12:09.903Z"
   }
 ]
