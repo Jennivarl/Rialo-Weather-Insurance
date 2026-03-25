@@ -251,173 +251,173 @@ export function PayOnRainAppWithBackend() {
 
   return (
     <div className="min-h-screen bg-[#E8F0FA]">
-      {/* Header */
-        <header className="bg-white/80 backdrop-blur-md border-b border-[#e0dcd4] sticky top-0 z-50 shadow-sm">
-          <div className="max-w-[1200px] mx-auto px-5 md:px-10 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute inset-0 bg-[#0EA5E9] opacity-10 blur-xl rounded-full"></div>
-                <RialoLogo size={36} className="text-[#0EA5E9] relative" />
-              </div>
-              <div>
-                <span className="text-[22px] font-bold text-[#0EA5E9] block leading-none">
-                  PayOnRain
-                </span>
-                <span className="text-[10px] text-[#0EA5E9] uppercase tracking-wide">
-                  by Rialo
-                </span>
-              </div>
+      {/* Header */}
+      <header className="bg-white/80 backdrop-blur-md border-b border-[#e0dcd4] sticky top-0 z-50 shadow-sm">
+        <div className="max-w-[1200px] mx-auto px-5 md:px-10 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="absolute inset-0 bg-[#0EA5E9] opacity-10 blur-xl rounded-full"></div>
+              <RialoLogo size={36} className="text-[#0EA5E9] relative" />
             </div>
+            <div>
+              <span className="text-[22px] font-bold text-[#0EA5E9] block leading-none">
+                PayOnRain
+              </span>
+              <span className="text-[10px] text-[#0EA5E9] uppercase tracking-wide">
+                by Rialo
+              </span>
+            </div>
+          </div>
 
-            {authenticated ? (
-              <div className="flex items-center gap-4">
-                <div className="hidden sm:block text-right">
-                  <div className="text-[13px] font-semibold text-[#1a1714]">
-                    {username || emailAddress || "Account"}
-                  </div>
-                  <div className="text-[11px] font-mono text-[#6b6b6b]">
-                    {displayAddress || "Setting up wallet..."}
-                  </div>
+          {authenticated ? (
+            <div className="flex items-center gap-4">
+              <div className="hidden sm:block text-right">
+                <div className="text-[13px] font-semibold text-[#1a1714]">
+                  {username || emailAddress || "Account"}
                 </div>
-                {policyCreated && (
-                  <Button
-                    onClick={handleNewPolicy}
-                    className="bg-white border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9] hover:text-white font-bold text-[13px] px-4 py-2 rounded-[8px] h-auto transition-all"
-                  >
-                    New Policy
-                  </Button>
-                )}
-                <div className="relative">
-                  <button
-                    onClick={() => setProfileOpen(o => !o)}
-                    className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#0EA5E9] to-[#38bdf8] flex items-center justify-center text-white font-bold text-[14px] focus:outline-none hover:opacity-90 transition-opacity"
-                  >
-                    {pfpUrl ? (
-                      <img src={pfpUrl} alt="Profile" className="w-full h-full object-cover" />
-                    ) : (
-                      <span>{emailInitial}</span>
-                    )}
-                  </button>
-                  {profileOpen && (
-                    <>
-                      <div className="fixed inset-0 z-40" onClick={() => setProfileOpen(false)} />
-                      <div className="absolute right-0 top-12 z-50 bg-white border border-[#e0dcd4] rounded-[12px] shadow-xl p-4 w-[260px] animate-in fade-in slide-in-from-top-2 duration-200">
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-[13px] font-bold text-[#1a1714]">Profile</span>
-                          <button onClick={() => setProfileOpen(false)} className="text-gray-400 hover:text-gray-600">
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                        <div className="flex flex-col items-center mb-4">
-                          <button
-                            onClick={() => fileInputRef.current?.click()}
-                            className="relative w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-[#0EA5E9] to-[#38bdf8] flex items-center justify-center text-white font-bold text-[22px] hover:opacity-80 transition-opacity group"
-                          >
-                            {pfpUrl ? (
-                              <img src={pfpUrl} alt="Profile" className="w-full h-full object-cover" />
-                            ) : (
-                              <span>{emailInitial}</span>
-                            )}
-                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                              <Camera className="w-5 h-5 text-white" />
-                            </div>
-                          </button>
-                          <span className="text-[11px] text-[#6b6b6b] mt-2">Click to change photo</span>
-                        </div>
-                        <div className="space-y-3">
-                          <div>
-                            <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-1.5">Email</label>
-                            <div className="text-[13px] text-[#1a1714] bg-[#f5f5f4] px-3 py-2 rounded-lg truncate">{emailAddress || displayAddress || '—'}</div>
+                <div className="text-[11px] font-mono text-[#6b6b6b]">
+                  {displayAddress || "Setting up wallet..."}
+                </div>
+              </div>
+              {policyCreated && (
+                <Button
+                  onClick={handleNewPolicy}
+                  className="bg-white border-2 border-[#0EA5E9] text-[#0EA5E9] hover:bg-[#0EA5E9] hover:text-white font-bold text-[13px] px-4 py-2 rounded-[8px] h-auto transition-all"
+                >
+                  New Policy
+                </Button>
+              )}
+              <div className="relative">
+                <button
+                  onClick={() => setProfileOpen(o => !o)}
+                  className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-[#0EA5E9] to-[#38bdf8] flex items-center justify-center text-white font-bold text-[14px] focus:outline-none hover:opacity-90 transition-opacity"
+                >
+                  {pfpUrl ? (
+                    <img src={pfpUrl} alt="Profile" className="w-full h-full object-cover" />
+                  ) : (
+                    <span>{emailInitial}</span>
+                  )}
+                </button>
+                {profileOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setProfileOpen(false)} />
+                    <div className="absolute right-0 top-12 z-50 bg-white border border-[#e0dcd4] rounded-[12px] shadow-xl p-4 w-[260px] animate-in fade-in slide-in-from-top-2 duration-200">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-[13px] font-bold text-[#1a1714]">Profile</span>
+                        <button onClick={() => setProfileOpen(false)} className="text-gray-400 hover:text-gray-600">
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <div className="flex flex-col items-center mb-4">
+                        <button
+                          onClick={() => fileInputRef.current?.click()}
+                          className="relative w-16 h-16 rounded-full overflow-hidden bg-gradient-to-br from-[#0EA5E9] to-[#38bdf8] flex items-center justify-center text-white font-bold text-[22px] hover:opacity-80 transition-opacity group"
+                        >
+                          {pfpUrl ? (
+                            <img src={pfpUrl} alt="Profile" className="w-full h-full object-cover" />
+                          ) : (
+                            <span>{emailInitial}</span>
+                          )}
+                          <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <Camera className="w-5 h-5 text-white" />
                           </div>
-                          {walletAddress && (
-                            <div>
-                              <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-1.5">Wallet</label>
-                              <div className="flex items-center gap-2 bg-[#f5f5f4] px-3 py-2 rounded-lg">
-                                <span className="text-[12px] font-mono text-[#1a1714] flex-1 truncate">{displayAddress}</span>
-                                <button onClick={() => { navigator.clipboard.writeText(walletAddress); toast.success('Copied!'); }} className="text-[#6b6b6b] hover:text-[#0EA5E9] shrink-0">
-                                  <Copy className="w-3.5 h-3.5" />
-                                </button>
+                        </button>
+                        <span className="text-[11px] text-[#6b6b6b] mt-2">Click to change photo</span>
+                      </div>
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-1.5">Email</label>
+                          <div className="text-[13px] text-[#1a1714] bg-[#f5f5f4] px-3 py-2 rounded-lg truncate">{emailAddress || displayAddress || '—'}</div>
+                        </div>
+                        {walletAddress && (
+                          <div>
+                            <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-1.5">Wallet</label>
+                            <div className="flex items-center gap-2 bg-[#f5f5f4] px-3 py-2 rounded-lg">
+                              <span className="text-[12px] font-mono text-[#1a1714] flex-1 truncate">{displayAddress}</span>
+                              <button onClick={() => { navigator.clipboard.writeText(walletAddress); toast.success('Copied!'); }} className="text-[#6b6b6b] hover:text-[#0EA5E9] shrink-0">
+                                <Copy className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                        {walletBalance && (
+                          <div className="bg-gradient-to-r from-[#f0f9ff] to-[#e0f2fe] border border-[#0EA5E9]/20 rounded-lg px-3 py-3">
+                            <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-2">Balances</label>
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <div className="text-[18px] font-bold text-[#0EA5E9]">${walletBalance.usdc.toFixed(2)}</div>
+                                <div className="text-[10px] text-[#6b6b6b]">USDC</div>
+                              </div>
+                              <div className="text-right">
+                                <div className="text-[15px] font-bold text-[#1a1714]">{walletBalance.sol.toFixed(4)}</div>
+                                <div className="text-[10px] text-[#6b6b6b]">SOL</div>
                               </div>
                             </div>
-                          )}
-                          {walletBalance && (
-                            <div className="bg-gradient-to-r from-[#f0f9ff] to-[#e0f2fe] border border-[#0EA5E9]/20 rounded-lg px-3 py-3">
-                              <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-2">Balances</label>
-                              <div className="flex items-center justify-between">
-                                <div>
-                                  <div className="text-[18px] font-bold text-[#0EA5E9]">${walletBalance.usdc.toFixed(2)}</div>
-                                  <div className="text-[10px] text-[#6b6b6b]">USDC</div>
-                                </div>
-                                <div className="text-right">
-                                  <div className="text-[15px] font-bold text-[#1a1714]">{walletBalance.sol.toFixed(4)}</div>
-                                  <div className="text-[10px] text-[#6b6b6b]">SOL</div>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                          <div>
-                            <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-1.5">Display Name</label>
-                            <input
-                              type="text"
-                              placeholder="Your name"
-                              value={username}
-                              onChange={e => {
-                                setUsername(e.target.value);
-                                localStorage.setItem('payonrain_username', e.target.value);
-                              }}
-                              className="w-full text-[13px] bg-[#fafaf9] border border-[#e0dcd4] px-3 py-2 rounded-lg focus:outline-none focus:border-[#0EA5E9]"
-                            />
                           </div>
-                          <div>
-                            <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-1.5">Policies Created</label>
-                            <div className="text-[13px] font-bold text-[#1a1714] bg-[#f5f5f4] px-3 py-2 rounded-lg">{policyHistory.length + (policyCreated ? 1 : 0)}</div>
-                          </div>
+                        )}
+                        <div>
+                          <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-1.5">Display Name</label>
+                          <input
+                            type="text"
+                            placeholder="Your name"
+                            value={username}
+                            onChange={e => {
+                              setUsername(e.target.value);
+                              localStorage.setItem('payonrain_username', e.target.value);
+                            }}
+                            className="w-full text-[13px] bg-[#fafaf9] border border-[#e0dcd4] px-3 py-2 rounded-lg focus:outline-none focus:border-[#0EA5E9]"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[11px] font-bold text-[#6b6b6b] uppercase tracking-wide block mb-1.5">Policies Created</label>
+                          <div className="text-[13px] font-bold text-[#1a1714] bg-[#f5f5f4] px-3 py-2 rounded-lg">{policyHistory.length + (policyCreated ? 1 : 0)}</div>
                         </div>
                       </div>
-                    </>
-                  )}
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={e => {
-                      const file = e.target.files?.[0];
-                      if (!file) return;
-                      const reader = new FileReader();
-                      reader.onload = ev => {
-                        const url = ev.target?.result as string;
-                        setPfpUrl(url);
-                        localStorage.setItem('payonrain_pfp', url);
-                      };
-                      reader.readAsDataURL(file);
-                    }}
-                  />
-                </div>
+                    </div>
+                  </>
+                )}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={e => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = ev => {
+                      const url = ev.target?.result as string;
+                      setPfpUrl(url);
+                      localStorage.setItem('payonrain_pfp', url);
+                    };
+                    reader.readAsDataURL(file);
+                  }}
+                />
               </div>
-            ) : (
-              <Button
-                onClick={login}
-                disabled={!privyReady}
-                className="bg-[#0EA5E9] hover:bg-[#0284c7] text-white font-bold text-[14px] px-6 py-2.5 rounded-[8px] h-auto transition-all hover:shadow-lg hover:shadow-[#0EA5E9]/20 active:scale-[0.98] disabled:opacity-50"
-              >
-                Sign In
-              </Button>
-            )}
-            {authenticated && (
-              <Button
-                onClick={() => {
-                  logout();
-                  handleNewPolicy();
-                  toast.success("Disconnected.");
-                }}
-                className="hidden sm:inline-flex bg-gray-100 hover:bg-gray-200 text-[#1a1714] font-bold text-[13px] px-4 py-2.5 rounded-[8px] h-auto transition-all"
-              >
-                Disconnect
-              </Button>
-            )}
-          </div>
-        </header>
+            </div>
+          ) : (
+            <Button
+              onClick={login}
+              disabled={!privyReady}
+              className="bg-[#0EA5E9] hover:bg-[#0284c7] text-white font-bold text-[14px] px-6 py-2.5 rounded-[8px] h-auto transition-all hover:shadow-lg hover:shadow-[#0EA5E9]/20 active:scale-[0.98] disabled:opacity-50"
+            >
+              Sign In
+            </Button>
+          )}
+          {authenticated && (
+            <Button
+              onClick={() => {
+                logout();
+                handleNewPolicy();
+                toast.success("Disconnected.");
+              }}
+              className="hidden sm:inline-flex bg-gray-100 hover:bg-gray-200 text-[#1a1714] font-bold text-[13px] px-4 py-2.5 rounded-[8px] h-auto transition-all"
+            >
+              Disconnect
+            </Button>
+          )}
+        </div>
+      </header>
 
       {/* Hero Section */}
       {!authenticated && (
