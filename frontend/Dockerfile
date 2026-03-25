@@ -2,7 +2,7 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 COPY . .
 # VITE_API_URL is injected at build time via Railway env var
 ARG VITE_API_URL
