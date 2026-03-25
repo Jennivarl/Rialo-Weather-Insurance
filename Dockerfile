@@ -5,3 +5,4 @@ RUN npm install --omit=dev
 COPY . .
 EXPOSE ${PORT:-3001}
 CMD ["node", "server.js"]
+CMD ["node", "server.js"]
