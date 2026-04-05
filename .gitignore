@@ -27,6 +27,9 @@ out/
 # Solana treasury keypair — NEVER commit this
 solana-treasury.json
 
+# Server NaCl keypair — NEVER commit this
+keys.json
+
 # Logs
 logs/
 *.log
